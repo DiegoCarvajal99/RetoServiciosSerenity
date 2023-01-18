@@ -1,0 +1,42 @@
+apply plugin: 'java-library'
+
+apply plugin: 'eclipse'
+repositories {
+    mavenLocal()
+    mavenCentral()
+    jcenter()
+    maven {
+        url 'https://jitpack.io'
+    }
+}
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+        maven {
+            //Descargar dependencias de otro repositorio
+            url 'https://jitpack.io'
+        }
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:2.0.80")
+    }
+}
+dependencies {
+    // Dependencias para poder automatizar con Serenity
+    implementation 'net.serenity-bdd:serenity-junit:2.0.80'
+    implementation 'net.serenity-bdd:serenity-cucumber:1.9.45'
+    implementation 'net.serenity-bdd:serenity-core:2.0.80'
+    implementation 'org.slf4j:slf4j-simple:1.7.7'
+    //Integracion serenity rest -assured
+    implementation 'net.serenity-bdd:serenity-rest-assured:2.0.80'
+    //Manipular objetos JSON con Apache
+    implementation 'org.json:json:20180813'
+}
+test {
+    //Ignorar los fallos es ejecutar todas las pruebas asi alguna falle
+    ignoreFailures = true
+}
+// Continue asi falle alguna tarea de Gradle
+gradle.startParameter.continueOnFailure = true
